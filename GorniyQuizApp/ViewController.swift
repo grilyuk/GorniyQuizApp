@@ -9,11 +9,24 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    @IBOutlet weak var startButtonOutlet: UIButton!
+    @IBOutlet weak var optionsButtonOutlet: UIButton!
+    @IBOutlet weak var resultButtonOutlet: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
+    
+    @IBAction func startButtonAction(_ sender: Any) {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "QuizViewController") as? QuizViewController else { return }
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func initialize() {
+        
+    }
 }
 
