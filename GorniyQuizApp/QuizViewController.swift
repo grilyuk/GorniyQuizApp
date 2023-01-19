@@ -13,13 +13,16 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var quizTableView: UITableView!
     
+    
+    
     var parseService = Parser()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
-        getQuestion()
+        view.backgroundColor = .yellow
+//        initialize()
+//        getQuestion()
     }
     
     
@@ -30,8 +33,8 @@ class QuizViewController: UIViewController {
     }
         
     func initialize() {
-        self.quizTableView.delegate = self
-        self.quizTableView.dataSource = self
+        self.quizTableView?.delegate = self
+        self.quizTableView?.dataSource = self
         quizTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         quizTableView.isScrollEnabled = false
     }
