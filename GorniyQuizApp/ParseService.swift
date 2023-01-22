@@ -8,17 +8,17 @@
 import Foundation
 
 class Parser {
-    var result: Question?
+    var result: Quiz?
     
     func getQuiz() {
         guard let path = Bundle.main.path(forResource: "ExampleJSON", ofType: "json") else { return }
         
         do {
             guard let jsonData = try String(contentsOfFile: path).data(using: .utf8) else { return }
-            result = try JSONDecoder().decode(Question.self, from: jsonData)
+            result = try JSONDecoder().decode(Quiz.self, from: jsonData)
         } catch {
             print(error.localizedDescription)
         }
     }
-
+    
 }

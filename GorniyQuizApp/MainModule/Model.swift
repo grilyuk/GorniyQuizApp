@@ -7,9 +7,12 @@
 
 import Foundation
 
+struct Quiz: Decodable {
+    var quiz: [Question]
+}
+
 struct Question: Decodable {
-    var question: String
-    var rightAnswer: String
+    var question, correctAnswer: String
     var answers: Answer
 }
 

@@ -10,7 +10,7 @@ import UIKit
 class StartViewController: UIViewController {
     
     //MARK: Property
-    let startButton = UIButton()
+    let startButton = UIButton(type: .system)
     let welcomeLabel = UILabel()
     let logoView = UIImageView()
     
@@ -56,9 +56,9 @@ class StartViewController: UIViewController {
         startButton.sizeToFit()
         startButton.translatesAutoresizingMaskIntoConstraints = false
         startButton.setTitle("Let\'s test!", for: .normal)
+        startButton.setTitleColor(.white, for: .normal)
         startButton.backgroundColor = .systemGreen
         startButton.layer.cornerRadius = startButton.frame.height/2
-        
         startButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
