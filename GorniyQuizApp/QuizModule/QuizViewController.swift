@@ -13,7 +13,7 @@ class QuizViewController: UIViewController {
     let questionLabel = UILabel()
     let scoreLabel = UILabel()
     
-    var parseService = Parser()
+    var parseService = ParseService()
     
     var numberQuestion = 0
     var score = 0
@@ -46,7 +46,7 @@ class QuizViewController: UIViewController {
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 0
-        questionLabel.text = parseService.result?.quiz[numberQuestion].question
+        questionLabel.text = parseService.quiz?.quiz[numberQuestion].question
         
         NSLayoutConstraint.activate([
             questionLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
@@ -70,12 +70,12 @@ class QuizViewController: UIViewController {
 extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return parseService.result?.quiz[numberQuestion].answers.answer.count ?? 0
+        return parseService.quiz?.quiz[numberQuestion].answers.answer.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = quizTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = parseService.result?.quiz[numberQuestion].answers.answer[indexPath.row]
+        cell.textLabel?.text = parseService.quiz?.quiz[numberQuestion].answers.answer[indexPath.row]
         cell.backgroundColor = .systemGreen
         cell.textLabel?.textAlignment = .center
         cell.layer.cornerRadius = cell.frame.height/2
@@ -87,18 +87,24 @@ extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if numberQuestion < parseService.result!.quiz.count - 1 {
+        if numberQuestion < parseService.quiz!.quiz.count - 1 {
             numberQuestion += 1
+            if (parseService.quiz?.quiz[numberQuestion-1].answers.answer[indexPath.row]) == parseService.quiz?.quiz[numberQuestion-1].correctAnswer {
+                score += 1
+                scoreLabel.text = "Your score \(score)"
+            }
         } else {
-            self.navigationController?.pushViewController(ResultViewController(), animated: true)
+            if (parseService.quiz?.quiz[numberQuestion].answers.answer[indexPath.row]) == parseService.quiz?.quiz[numberQuestion].correctAnswer {
+                score += 1
+                scoreLabel.text = "Your score \(score)"
+            }
+            let vc = ResultViewController()
+            vc.score = score
+            vc.numberQuestion = numberQuestion+1
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-        
-        if (parseService.result?.quiz[numberQuestion-1].answers.answer[indexPath.row]) == parseService.result?.quiz[numberQuestion-1].correctAnswer {
-            score += 1
-            scoreLabel.text = "Your score \(score)"
-        }
-        
-        questionLabel.text = parseService.result?.quiz[numberQuestion].question
+
+        questionLabel.text = parseService.quiz?.quiz[numberQuestion].question
         tableView.reloadData()
     }
 }

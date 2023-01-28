@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E359C142985DB91005C1771 /* StartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E359C132985DB91005C1771 /* StartPresenter.swift */; };
 		5EB4D47A297DCF130077D18D /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB4D479297DCF130077D18D /* ResultViewController.swift */; };
 		5ED4FB9B2973145500FCB8A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4FB9A2973145500FCB8A4 /* AppDelegate.swift */; };
 		5ED4FB9D2973145500FCB8A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4FB9C2973145500FCB8A4 /* SceneDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E359C132985DB91005C1771 /* StartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPresenter.swift; sourceTree = "<group>"; };
 		5EB4D479297DCF130077D18D /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		5ED4FB972973145500FCB8A4 /* GorniyQuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorniyQuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ED4FB9A2973145500FCB8A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,73 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E359C0B2985DA06005C1771 /* QuizModule */ = {
+			isa = PBXGroup;
+			children = (
+				5EEF00B229731C7100906657 /* QuizViewController.swift */,
+			);
+			path = QuizModule;
+			sourceTree = "<group>";
+		};
+		5E359C0C2985DA38005C1771 /* ResultModule */ = {
+			isa = PBXGroup;
+			children = (
+				5EB4D479297DCF130077D18D /* ResultViewController.swift */,
+			);
+			path = ResultModule;
+			sourceTree = "<group>";
+		};
+		5E359C0D2985DA7F005C1771 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5ED4FB9A2973145500FCB8A4 /* AppDelegate.swift */,
+				5ED4FB9C2973145500FCB8A4 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5E359C0E2985DAEE005C1771 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5EEF00B429733BA000906657 /* ParseService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5E359C0F2985DB0A005C1771 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5ED4FBAE2973170500FCB8A4 /* ExampleJSON.json */,
+				5ED4FBA32973145700FCB8A4 /* Assets.xcassets */,
+				5ED4FBA52973145700FCB8A4 /* LaunchScreen.storyboard */,
+				5ED4FBA82973145700FCB8A4 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5E359C102985DB27005C1771 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5E359C112985DB35005C1771 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5ED4FB9E2973145500FCB8A4 /* StartViewController.swift */,
+				5E359C132985DB91005C1771 /* StartPresenter.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5E359C122985DB3C005C1771 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		5ED4FB8E2973145500FCB8A4 = {
 			isa = PBXGroup;
 			children = (
@@ -64,27 +133,25 @@
 		5ED4FB992973145500FCB8A4 /* GorniyQuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				5ED4FB9A2973145500FCB8A4 /* AppDelegate.swift */,
-				5ED4FB9C2973145500FCB8A4 /* SceneDelegate.swift */,
-				5ED4FBB229731A0600FCB8A4 /* MainModule */,
-				5ED4FB9E2973145500FCB8A4 /* StartViewController.swift */,
-				5EEF00B229731C7100906657 /* QuizViewController.swift */,
-				5EB4D479297DCF130077D18D /* ResultViewController.swift */,
-				5EEF00B429733BA000906657 /* ParseService.swift */,
-				5ED4FBA32973145700FCB8A4 /* Assets.xcassets */,
-				5ED4FBA52973145700FCB8A4 /* LaunchScreen.storyboard */,
-				5ED4FBA82973145700FCB8A4 /* Info.plist */,
-				5ED4FBAE2973170500FCB8A4 /* ExampleJSON.json */,
+				5E359C0D2985DA7F005C1771 /* Application */,
+				5ED4FBB229731A0600FCB8A4 /* StartModule */,
+				5E359C0B2985DA06005C1771 /* QuizModule */,
+				5E359C0C2985DA38005C1771 /* ResultModule */,
+				5E359C0E2985DAEE005C1771 /* Services */,
+				5ED4FBB02973197100FCB8A4 /* Model.swift */,
+				5E359C0F2985DB0A005C1771 /* Resources */,
 			);
 			path = GorniyQuizApp;
 			sourceTree = "<group>";
 		};
-		5ED4FBB229731A0600FCB8A4 /* MainModule */ = {
+		5ED4FBB229731A0600FCB8A4 /* StartModule */ = {
 			isa = PBXGroup;
 			children = (
-				5ED4FBB02973197100FCB8A4 /* Model.swift */,
+				5E359C122985DB3C005C1771 /* Presenter */,
+				5E359C112985DB35005C1771 /* View */,
+				5E359C102985DB27005C1771 /* Model */,
 			);
-			path = MainModule;
+			path = StartModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +230,7 @@
 				5EB4D47A297DCF130077D18D /* ResultViewController.swift in Sources */,
 				5EEF00B329731C7100906657 /* QuizViewController.swift in Sources */,
 				5ED4FB9B2973145500FCB8A4 /* AppDelegate.swift in Sources */,
+				5E359C142985DB91005C1771 /* StartPresenter.swift in Sources */,
 				5ED4FB9D2973145500FCB8A4 /* SceneDelegate.swift in Sources */,
 				5ED4FBB12973197100FCB8A4 /* Model.swift in Sources */,
 			);
@@ -305,7 +373,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 44J3T4A266;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GorniyQuizApp/Info.plist;
+				INFOPLIST_FILE = GorniyQuizApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -336,7 +404,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 44J3T4A266;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GorniyQuizApp/Info.plist;
+				INFOPLIST_FILE = GorniyQuizApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
