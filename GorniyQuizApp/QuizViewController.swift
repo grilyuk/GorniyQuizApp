@@ -90,7 +90,7 @@ extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
         if numberQuestion < parseService.result!.quiz.count - 1 {
             numberQuestion += 1
         } else {
-            return
+            self.navigationController?.pushViewController(ResultViewController(), animated: true)
         }
         
         if (parseService.result?.quiz[numberQuestion-1].answers.answer[indexPath.row]) == parseService.result?.quiz[numberQuestion-1].correctAnswer {
