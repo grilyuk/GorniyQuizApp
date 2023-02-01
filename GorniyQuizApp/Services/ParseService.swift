@@ -8,21 +8,20 @@
 import Foundation
 
 protocol ParseServiceProtocol {
-    func getQuestions()
+    func getQuiz(completion: @escaping (Result<Quiz?, Error>) -> Void)
 }
 
-class ParseService {
+class ParseService: ParseServiceProtocol {
     
-    var quiz: Quiz?
-    
-    func getQuiz() {
+    func getQuiz(completion: @escaping (Result<Quiz?, Error>) -> Void) {
         guard let path = Bundle.main.path(forResource: "ExampleJSON", ofType: "json") else { return }
         
         do {
             guard let jsonData = try String(contentsOfFile: path).data(using: .utf8) else { return }
-            quiz = try JSONDecoder().decode(Quiz.self, from: jsonData)
+            let quiz = try JSONDecoder().decode(Quiz.self, from: jsonData)
+            completion(.success(quiz))
         } catch {
-            print(error.localizedDescription)
+            completion(.failure(error))
         }
     }
     
