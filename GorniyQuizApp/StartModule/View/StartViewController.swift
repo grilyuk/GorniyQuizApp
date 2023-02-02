@@ -7,12 +7,19 @@
 
 import UIKit
 
+protocol StartViewProtocol: AnyObject {
+    func success() 
+    func failure(error: Error)
+}
+
 class StartViewController: UIViewController {
     
-    //MARK: Property
+    //MARK: Properties
     let startButton = UIButton(type: .system)
     let welcomeLabel = UILabel()
     let logoView = UIImageView()
+    var presenter: StartPresenterProtocol!
+    
     
     //MARK: UI constants
     enum UIConstants {
@@ -21,12 +28,18 @@ class StartViewController: UIViewController {
         static let topLabelToTopSafeArea: CGFloat = 100
         static let logoImageToTopSafeArea: CGFloat = 300
         static let buttonTitleFontSize: CGFloat = 40
+        static let bgColor = CGColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
     }
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .init(cgColor: CGColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1))
+        setupUI()
+    }
+    
+    //MARK: Set UI
+    func setupUI() {
+        view.backgroundColor = .init(cgColor: UIConstants.bgColor)
         view.addSubview(startButton)
         view.addSubview(welcomeLabel)
         view.addSubview(logoView)
@@ -35,9 +48,7 @@ class StartViewController: UIViewController {
         setLogoView()
     }
     
-    //MARK: Set UI
     func setWelcomeLabel() {
-        
         welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
         welcomeLabel.textAlignment = .center
         welcomeLabel.numberOfLines = 0
@@ -51,7 +62,6 @@ class StartViewController: UIViewController {
     }
     
     func setStartButton() {
-        
         startButton.titleLabel?.font = startButton.titleLabel?.font.withSize(UIConstants.buttonTitleFontSize)
         startButton.sizeToFit()
         startButton.translatesAutoresizingMaskIntoConstraints = false
@@ -69,12 +79,11 @@ class StartViewController: UIViewController {
     }
     
     @objc func buttonAction(sender: UIButton!) {
-        
-        self.navigationController?.pushViewController(QuizViewController(), animated: true)
+        presenter.getQuiz()
+        presenter.router.showQuiz(quiz: presenter.quiz)
     }
     
     func setLogoView() {
-        
         logoView.translatesAutoresizingMaskIntoConstraints = false
         logoView.image = UIImage(named: "LogoGorniy")
         
@@ -85,3 +94,12 @@ class StartViewController: UIViewController {
     }
 }
 
+//MARK: ConfirmProtocol
+extension StartViewController: StartViewProtocol {
+    func success() {
+    }
+    
+    func failure(error: Error) {
+        print(error.localizedDescription)
+    }
+}

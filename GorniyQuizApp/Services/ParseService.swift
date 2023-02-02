@@ -7,18 +7,19 @@
 
 import Foundation
 
-class Parser {
-    var result: Quiz?
-    
-    func getQuiz() {
+protocol ParseServiceProtocol {
+    func getQuiz(completion: @escaping (Result<Quiz?, Error>) -> Void)
+}
+
+class ParseService: ParseServiceProtocol {
+    func getQuiz(completion: @escaping (Result<Quiz?, Error>) -> Void) {
         guard let path = Bundle.main.path(forResource: "ExampleJSON", ofType: "json") else { return }
-        
         do {
             guard let jsonData = try String(contentsOfFile: path).data(using: .utf8) else { return }
-            result = try JSONDecoder().decode(Quiz.self, from: jsonData)
+            let quiz = try JSONDecoder().decode(Quiz.self, from: jsonData)
+            completion(.success(quiz))
         } catch {
-            print(error.localizedDescription)
+            completion(.failure(error))
         }
     }
-    
 }

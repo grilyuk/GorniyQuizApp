@@ -7,33 +7,42 @@
 
 import UIKit
 
+protocol QuizViewProtocol: AnyObject {
+    func success()
+    func failure(error: Error)
+}
+
 class QuizViewController: UIViewController {
     
+    //MARK: Properties
+    var presenter: QuizPresenterProtocol!
     let quizTableView = UITableView()
     let questionLabel = UILabel()
     let scoreLabel = UILabel()
-    
-    var parseService = Parser()
-    
     var numberQuestion = 0
-    var score = 0
     
+    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+    }
+    
+    //MARK: Set UI
+    func setupUI() {
+        navigationController?.isNavigationBarHidden = false
         view.backgroundColor = .init(cgColor: CGColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1))
         view.addSubview(quizTableView)
         view.addSubview(questionLabel)
         view.addSubview(scoreLabel)
-        parseService.getQuiz()
         setTableView()
         setQuestionLabel()
         setScoreLabel()
     }
     
     func setScoreLabel() {
-        
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        scoreLabel.text = "Your score \(score)"
+        scoreLabel.text = "Your score \(presenter.score)"
         
         NSLayoutConstraint.activate([
             scoreLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -42,11 +51,10 @@ class QuizViewController: UIViewController {
     }
     
     func setQuestionLabel() {
-        
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionLabel.textAlignment = .center
         questionLabel.numberOfLines = 0
-        questionLabel.text = parseService.result?.quiz[numberQuestion].question
+        questionLabel.text = presenter.quiz?.quiz[numberQuestion].question
         
         NSLayoutConstraint.activate([
             questionLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
@@ -67,15 +75,15 @@ class QuizViewController: UIViewController {
     }
 }
 
+//MARK: Delegate and DataSource
 extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return parseService.result?.quiz[numberQuestion].answers.answer.count ?? 0
+        return presenter.quiz?.quiz[numberQuestion].answers.answer.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = quizTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = parseService.result?.quiz[numberQuestion].answers.answer[indexPath.row]
+        cell.textLabel?.text = presenter.quiz?.quiz[numberQuestion].answers.answer[indexPath.row]
         cell.backgroundColor = .systemGreen
         cell.textLabel?.textAlignment = .center
         cell.layer.cornerRadius = cell.frame.height/2
@@ -87,18 +95,32 @@ extension QuizViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if numberQuestion < parseService.result!.quiz.count - 1 {
+        if numberQuestion < presenter.quiz!.quiz.count - 1 {
             numberQuestion += 1
+        
+            if (presenter.quiz?.quiz[numberQuestion-1].answers.answer[indexPath.row]) == presenter.quiz?.quiz[numberQuestion-1].correctAnswer {
+                presenter.score += 1
+                scoreLabel.text = "Your score \(presenter.score)"
+            }
         } else {
-            return
+            if (presenter.quiz?.quiz[numberQuestion].answers.answer[indexPath.row]) == presenter.quiz?.quiz[numberQuestion].correctAnswer {
+                presenter.score += 1
+                scoreLabel.text = "Your score \(presenter.score)"
+            }
+            presenter.router.showResult(score: presenter.score, numberQuestion: numberQuestion+1)
         }
         
-        if (parseService.result?.quiz[numberQuestion-1].answers.answer[indexPath.row]) == parseService.result?.quiz[numberQuestion-1].correctAnswer {
-            score += 1
-            scoreLabel.text = "Your score \(score)"
-        }
-        
-        questionLabel.text = parseService.result?.quiz[numberQuestion].question
+        questionLabel.text = presenter.quiz?.quiz[numberQuestion].question
         tableView.reloadData()
+    }
+}
+
+//MARK: Confirm protocol
+extension QuizViewController: QuizViewProtocol {
+    func success() {
+    }
+    
+    func failure(error: Error) {
+        print(error.localizedDescription)
     }
 }
