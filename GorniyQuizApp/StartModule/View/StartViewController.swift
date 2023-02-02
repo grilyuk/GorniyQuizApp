@@ -8,13 +8,13 @@
 import UIKit
 
 protocol StartViewProtocol: AnyObject {
-    func success()
+    func success() 
     func failure(error: Error)
 }
 
 class StartViewController: UIViewController {
     
-    //MARK: Property
+    //MARK: Properties
     let startButton = UIButton(type: .system)
     let welcomeLabel = UILabel()
     let logoView = UIImageView()
@@ -28,6 +28,7 @@ class StartViewController: UIViewController {
         static let topLabelToTopSafeArea: CGFloat = 100
         static let logoImageToTopSafeArea: CGFloat = 300
         static let buttonTitleFontSize: CGFloat = 40
+        static let bgColor = CGColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
     }
     
     //MARK: viewDidLoad
@@ -37,9 +38,8 @@ class StartViewController: UIViewController {
     }
     
     //MARK: Set UI
-    
     func setupUI() {
-        view.backgroundColor = .init(cgColor: CGColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1))
+        view.backgroundColor = .init(cgColor: UIConstants.bgColor)
         view.addSubview(startButton)
         view.addSubview(welcomeLabel)
         view.addSubview(logoView)
@@ -79,6 +79,7 @@ class StartViewController: UIViewController {
     }
     
     @objc func buttonAction(sender: UIButton!) {
+        presenter.getQuiz()
         presenter.router.showQuiz(quiz: presenter.quiz)
     }
     
@@ -93,6 +94,7 @@ class StartViewController: UIViewController {
     }
 }
 
+//MARK: ConfirmProtocol
 extension StartViewController: StartViewProtocol {
     func success() {
     }

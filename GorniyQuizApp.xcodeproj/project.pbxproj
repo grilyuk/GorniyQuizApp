@@ -11,6 +11,7 @@
 		5E359C1E2989BB66005C1771 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E359C1D2989BB66005C1771 /* Builder.swift */; };
 		5E359C202989C36F005C1771 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E359C1F2989C36F005C1771 /* Router.swift */; };
 		5E359C23298AA61C005C1771 /* StartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E359C22298AA61C005C1771 /* StartPresenter.swift */; };
+		5E359C25298C3712005C1771 /* ResultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E359C24298C3712005C1771 /* ResultPresenter.swift */; };
 		5EB4D47A297DCF130077D18D /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB4D479297DCF130077D18D /* ResultViewController.swift */; };
 		5ED4FB9B2973145500FCB8A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4FB9A2973145500FCB8A4 /* AppDelegate.swift */; };
 		5ED4FB9D2973145500FCB8A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4FB9C2973145500FCB8A4 /* SceneDelegate.swift */; };
@@ -28,6 +29,7 @@
 		5E359C1D2989BB66005C1771 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
 		5E359C1F2989C36F005C1771 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		5E359C22298AA61C005C1771 /* StartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPresenter.swift; sourceTree = "<group>"; };
+		5E359C24298C3712005C1771 /* ResultPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPresenter.swift; sourceTree = "<group>"; };
 		5EB4D479297DCF130077D18D /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		5ED4FB972973145500FCB8A4 /* GorniyQuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorniyQuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ED4FB9A2973145500FCB8A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,8 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				5E359C102985DB27005C1771 /* Model */,
-				5E359C1A2989A407005C1771 /* Presenter */,
 				5E359C192989A3FF005C1771 /* View */,
+				5E359C1A2989A407005C1771 /* Presenter */,
 			);
 			path = QuizModule;
 			sourceTree = "<group>";
@@ -66,7 +68,8 @@
 		5E359C0C2985DA38005C1771 /* ResultModule */ = {
 			isa = PBXGroup;
 			children = (
-				5EB4D479297DCF130077D18D /* ResultViewController.swift */,
+				5E359C26298C4E5F005C1771 /* View */,
+				5E359C28298C4E70005C1771 /* Presenter */,
 			);
 			path = ResultModule;
 			sourceTree = "<group>";
@@ -76,8 +79,6 @@
 			children = (
 				5ED4FB9A2973145500FCB8A4 /* AppDelegate.swift */,
 				5ED4FB9C2973145500FCB8A4 /* SceneDelegate.swift */,
-				5E359C1D2989BB66005C1771 /* Builder.swift */,
-				5E359C1F2989C36F005C1771 /* Router.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -85,6 +86,8 @@
 		5E359C0E2985DAEE005C1771 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5E359C1D2989BB66005C1771 /* Builder.swift */,
+				5E359C1F2989C36F005C1771 /* Router.swift */,
 				5EEF00B429733BA000906657 /* ParseService.swift */,
 			);
 			path = Services;
@@ -141,6 +144,22 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		5E359C26298C4E5F005C1771 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5EB4D479297DCF130077D18D /* ResultViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5E359C28298C4E70005C1771 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5E359C24298C3712005C1771 /* ResultPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		5ED4FB8E2973145500FCB8A4 = {
 			isa = PBXGroup;
 			children = (
@@ -173,8 +192,8 @@
 		5ED4FBB229731A0600FCB8A4 /* StartModule */ = {
 			isa = PBXGroup;
 			children = (
-				5E359C21298AA60A005C1771 /* Presenter */,
 				5E359C112985DB35005C1771 /* View */,
+				5E359C21298AA60A005C1771 /* Presenter */,
 			);
 			path = StartModule;
 			sourceTree = "<group>";
@@ -261,6 +280,7 @@
 				5ED4FB9D2973145500FCB8A4 /* SceneDelegate.swift in Sources */,
 				5ED4FBB12973197100FCB8A4 /* Model.swift in Sources */,
 				5E359C1C2989A42D005C1771 /* QuizPresenter.swift in Sources */,
+				5E359C25298C3712005C1771 /* ResultPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -382,7 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

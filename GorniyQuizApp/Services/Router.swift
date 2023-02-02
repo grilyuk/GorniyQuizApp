@@ -15,8 +15,8 @@ protocol MainRouter {
 protocol RouterProtocol: MainRouter {
     func initianalViewController()
     func showQuiz(quiz: Quiz?)
-//    func showResult(score: Int)
-//    func popToRoot()
+    func showResult(score: Int, numberQuestion: Int)
+    func popToRoot()
 }
 
 class Router: RouterProtocol {
@@ -28,7 +28,7 @@ class Router: RouterProtocol {
         self.navigationController = navigationController
         self.moduleBuilder = moduleBuilder
     }
-
+    
     func initianalViewController() {
         if let navigationController = navigationController {
             guard let mainViewController = moduleBuilder?.createStart(router: self) else { return }
@@ -41,17 +41,16 @@ class Router: RouterProtocol {
             guard let quizViewController = moduleBuilder?.createQuiz(quiz: quiz, router: self) else { return }
             navigationController.pushViewController(quizViewController, animated: true)
         }
-
     }
     
-//    func showResult(score: Int) {
-//
-//    }
-//
-//    func popToRoot() {
-//
-//    }
+    func showResult(score: Int, numberQuestion: Int) {
+        if let navigationController = navigationController {
+            guard let resultViewController = moduleBuilder?.createResult(score: score, numberQuestion: numberQuestion, router: self) else { return }
+            navigationController.pushViewController(resultViewController, animated: true)
+        }
+    }
     
-    
-    
+    func popToRoot() {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }

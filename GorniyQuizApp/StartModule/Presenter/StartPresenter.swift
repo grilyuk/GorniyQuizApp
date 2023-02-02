@@ -29,16 +29,13 @@ class StartPresenter: StartPresenterProtocol {
     func getQuiz() {
         parser?.getQuiz(completion: { [weak self] result in
             guard self != nil else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let quiz):
-                    self?.quiz = quiz
-                    self?.view?.success()
-                case .failure(let error):
-                    self?.view?.failure(error: error)
-                }
+            switch result {
+            case .success(let quiz):
+                self?.quiz = quiz
+                self?.view?.success()
+            case .failure(let error):
+                self?.view?.failure(error: error)
             }
         })
     }
-
 }

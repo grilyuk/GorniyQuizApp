@@ -8,41 +8,23 @@
 import Foundation
 
 protocol QuizPresenterProtocol: AnyObject {
-    init(view: QuizViewProtocol, parser: ParseServiceProtocol, score: Int, router: RouterProtocol)
-    func getQuiz()
+    init(view: QuizViewProtocol, score: Int, router: RouterProtocol, quiz: Quiz)
+    var router: RouterProtocol { get set }
     var quiz: Quiz? { get set }
     var score: Int { get set }
 }
 
 class QuizPresenter: QuizPresenterProtocol {
     
-    var score: Int
-    var quiz: Quiz?
-    
     var view: QuizViewProtocol?
-    var parser: ParseServiceProtocol?
-    var router: RouterProtocol?
+    var router: RouterProtocol
+    var quiz: Quiz?
+    var score: Int
     
-    required init(view: QuizViewProtocol, parser: ParseServiceProtocol, score: Int, router: RouterProtocol) {
+    required init(view: QuizViewProtocol, score: Int, router: RouterProtocol, quiz: Quiz) {
         self.view = view
-        self.parser = parser
+        self.quiz = quiz
         self.score = score
         self.router = router
-        getQuiz()
-    }
-    
-    func getQuiz() {
-        parser?.getQuiz(completion: { [weak self] result in
-            guard self != nil else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let quiz):
-                    self?.quiz = quiz
-                    self?.view?.success()
-                case .failure(let error):
-                    self?.view?.failure(error: error)
-                }
-            }
-        })
     }
 }
